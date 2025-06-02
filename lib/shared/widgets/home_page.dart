@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../components/counter_button.dart';
-import '../view_models/home_view_model.dart';
+import 'counter_button.dart';
+import '../notifiers/home.dart';
 
-class HomePage extends HookConsumerWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(homeViewModelProvider);
+    final home = ref.watch(homeNotifyProvider);
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(viewModel.title),
+        title: Text(home.title),
       ),
       body: Center(
         child: Column(
@@ -21,7 +21,7 @@ class HomePage extends HookConsumerWidget {
           children: <Widget>[
             const Text('You have pushed the button this many times:'),
             Text(
-              '${viewModel.counter}',
+              '${home.counter}',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
